@@ -30,7 +30,7 @@ def costa_del_data_predict():
         return df_prod
 
     else:  # se o dado não chegou
-        return Response('{}', status=200, mimetype='application\\json')
+        return Response('{}', status=200, mimetype='application/json')
         # status = 200 e {}: a requisição deu certo, mas a execução deu errado
         # mimetype - indica que vem de uma aplicação json
 
