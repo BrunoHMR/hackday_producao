@@ -10,7 +10,7 @@ xgb_final = pickle.load(open('model/xgb_production.pkl', 'rb'))
 # inicializa a API
 app = Flask(__name__)
 
-@app.route("/costa_del_data/predict", methods=['POST'])
+@app.route('/costa_del_data/predict', methods=['POST'])
 def costa_del_data_predict():
     test_json = request.get_json()  # requisição do arquivo de teste formatado em json
 

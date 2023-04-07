@@ -7,7 +7,7 @@ from category_encoders.count import CountEncoder
 class CostaDelData(object):
 
     def __init__(self):
-        self.home_path = ""
+        self.home_path = ''
 
     def data_cleaning(self, df):
         # limpando coluna classificação do hotel
