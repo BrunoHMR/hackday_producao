@@ -1,6 +1,7 @@
 import pandas as pd
 import requests
 import json
+import os
 from flask import Flask, request, Response
 
 # constants
@@ -13,10 +14,7 @@ token = '6166531884:AAHfsnsqgkQRV4998A92K-tMnOCPYKPCQVk'
 # https://api.telegram.org/bot6166531884:AAHfsnsqgkQRV4998A92K-tMnOCPYKPCQVk/getUpdates
 
 # Webhook updates
-# https://api.telegram.org/bot6166531884:AAHfsnsqgkQRV4998A92K-tMnOCPYKPCQVk/setWebhook?url=https://78f1795f18d99a.lhr.life
-
-# Webhook updates
-# https://api.telegram.org/bot6166531884:AAHfsnsqgkQRV4998A92K-tMnOCPYKPCQVk/setWebhook?url=https://78f1795f18d99a.localhost.run
+# https://api.telegram.org/bot6166531884:AAHfsnsqgkQRV4998A92K-tMnOCPYKPCQVk/setWebhook?url=<localhost.run>
 
 # send message - envia mensagem do bot para mim
 # https://api.telegram.org/bot6166531884:AAHfsnsqgkQRV4998A92K-tMnOCPYKPCQVk/sendMessage?chat_id=5507011943&text=Hi
@@ -30,7 +28,7 @@ def send_message(chat_id, text):
     return None
 
 def load_data(id_reserva):
-    df2 = pd.read_csv("\\Users\\micro\\Desktop\\repos\\3_ciclo_intermediario\\4_hackday\\test.csv")
+    df2 = pd.read_csv('test.csv')
 
     df_test = df2[df2['id'] == id_reserva]
 
@@ -109,4 +107,5 @@ def index():
         '<h1> Hotel Telegram Bot </h1>'
 
 if __name__ == '__main__':
-    app.run(host = '0.0.0.0', port = 5000)
+    port = os.environ.get('PORT', 5000)
+    app.run(host='0.0.0.0', port=port)
