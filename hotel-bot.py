@@ -35,11 +35,6 @@ def load_data(id_reserva):
 
     if not df_test.empty:
 
-        pipeline = CostaDelData()
-
-        # tratativa de outliers
-        df_test = pipeline.data_cleaning(df_test)
-
         data = json.dumps(df_test.to_dict(orient = 'records'))
 
     else:
