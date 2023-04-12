@@ -139,6 +139,6 @@ class CostaDelData(object):
     def get_prediction_to_json(self, xgb_final, df_original, df_prep):
         predicao = xgb_final.predict(df_prep)
 
-        df_original['Predição'] = predicao
+        df_original['predicao'] = predicao
 
         return df_original.to_json(orient='records')
