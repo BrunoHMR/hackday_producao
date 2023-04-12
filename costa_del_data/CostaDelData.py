@@ -10,6 +10,7 @@ class CostaDelData(object):
     def __init__(self):
         self.home_path = ''
 
+    @staticmethod
     def data_cleaning(self, df):
         # Renomeando colunas
         df = df.rename(columns={'id': 'id',
@@ -115,6 +116,7 @@ class CostaDelData(object):
 
         return df_clean
 
+    @staticmethod
     def data_preparation(self, df_clean):
         # encodings e seleção de features
         x_cat_cols = ['regime_de_alimentacao', 'nacionalidade', 'forma_de_reserva', 'tipo_do_quarto_reservado', 'reserva_com_observacoes']
@@ -128,6 +130,7 @@ class CostaDelData(object):
 
         return df_prep
 
+    @staticmethod
     def get_prediction_to_json(self, xgb_final, df_original, df_prep):
         predicao = xgb_final.predict(df_prep)
 
