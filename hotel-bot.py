@@ -35,9 +35,9 @@ def load_data(id_reserva):
     if not df_test.empty:
 
         # tratativa de outliers
-        df = df[df['meses_da_reserva_ate_o_check_in'] <= 24]
-        df = df[(df['numero_de_pernoites_reservadas'] != 0) & (df['numero_de_pernoites_reservadas'] <= 30)]
-        df_clean = df[(df['numero_de_hospedes'] != 0) & (df['numero_de_hospedes'] <= 6)]
+        df_test = df_test[df_test['meses_da_reserva_ate_o_check_in'] <= 24]
+        df_test = df_test[(df_test['numero_de_pernoites_reservadas'] != 0) & (df_test['numero_de_pernoites_reservadas'] <= 30)]
+        df_test = df_test[(df_test['numero_de_hospedes'] != 0) & (df_test['numero_de_hospedes'] <= 6)]
 
         data = json.dumps(df_test.to_dict(orient = 'records'))
 
