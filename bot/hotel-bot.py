@@ -3,6 +3,7 @@ import requests
 import json
 import os
 from flask import Flask, request, Response
+from costa_del_data.CostaDelData import CostaDelData
 
 # constants
 token = '6166531884:AAHfsnsqgkQRV4998A92K-tMnOCPYKPCQVk'
@@ -35,6 +36,8 @@ def load_data(id_reserva):
     df2 = pd.read_csv('test.csv')
 
     df_test = df2[df2['id'] == id_reserva]
+    pipeline = CostaDelData()
+    df_test = pipeline.data_cleaning(df_test)
 
     if not df_test.empty:
 
