@@ -28,8 +28,7 @@ class CostaDelData(object):
                     'reserva_feita_por_agencia_de_turismo',
                     'reserva_feita_por_empresa',
                     'reserva_com_estacionamento',
-                    'reserva_com_observacoes',
-                    'reserva_cancelada']
+                    'reserva_com_observacoes']
         df.columns = cols_new
 
         # limpando coluna classificação do hotel
@@ -44,9 +43,6 @@ class CostaDelData(object):
         df['numero_de_hospedes'] = df['numero_de_hospedes'].astype('int64')
         df['numero_de_pernoites_reservadas'] = df['numero_de_pernoites_reservadas'].astype('int64')
         df['meses_da_reserva_ate_o_check_in'] = df['meses_da_reserva_ate_o_check_in'].astype('int64')
-
-        # criando coluna resposta categórica para posterior análise exploratória
-        df['reserva_cancelada_cat'] = df.apply(lambda x: 'Sim' if x['reserva_cancelada'] == 1 else 'Não', axis=1)
 
         # transformando as colunas categóricas de não em sim em numéricas de 0 e 1 para facilitar as análises
         df['ja_se_hospedou_anteriormente'] = df['ja_se_hospedou_anteriormente'].apply(lambda x: 0 if x == 'Não' else 1)

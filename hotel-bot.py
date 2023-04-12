@@ -3,6 +3,7 @@ import requests
 import json
 import os
 from flask import Flask, request, Response
+from costa_del_data.CostaDelData import CostaDelData
 
 # constants
 token = '6166531884:AAHfsnsqgkQRV4998A92K-tMnOCPYKPCQVk'
@@ -34,10 +35,10 @@ def load_data(id_reserva):
 
     if not df_test.empty:
 
+        pipeline = CostaDelData()
+
         # tratativa de outliers
-        df_test = df_test[df_test['meses_da_reserva_ate_o_check_in'] <= 24]
-        df_test = df_test[(df_test['numero_de_pernoites_reservadas'] != 0) & (df_test['numero_de_pernoites_reservadas'] <= 30)]
-        df_test = df_test[(df_test['numero_de_hospedes'] != 0) & (df_test['numero_de_hospedes'] <= 6)]
+        df_test = pipeline.data_cleaning(df_test)
 
         data = json.dumps(df_test.to_dict(orient = 'records'))
 
