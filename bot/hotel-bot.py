@@ -22,6 +22,7 @@ token = '6166531884:AAHfsnsqgkQRV4998A92K-tMnOCPYKPCQVk'
 # send message - envia mensagem do bot para mim
 # https://api.telegram.org/bot6166531884:AAHfsnsqgkQRV4998A92K-tMnOCPYKPCQVk/sendMessage?chat_id=5507011943&text=Hi
 
+
 def send_message(chat_id, text):
     url = 'https://api.telegram.org/bot{}/'.format(token)
     url = url + 'sendMessage?chat_id={}'.format(chat_id)

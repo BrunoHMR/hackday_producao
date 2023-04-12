@@ -21,9 +21,11 @@ def costa_del_data_predict():
         else:  # funciona para quando chegarem vários dados (mais de uma linha de um dicionário)
             test_raw = pd.DataFrame(test_json, columns=test_json[0].keys())  # keys: pega todas as linhas do dicionário
 
-        df_clean = CostaDelData.data_cleaning(test_raw)
-        df_prep = CostaDelData.data_preparation(df_clean)
-        df_prod = CostaDelData.get_prediction_to_json(xgb_final, test_raw, df_prep)
+        pipeline = CostaDelData()
+
+        df_clean = pipeline.data_cleaning(test_raw)
+        df_prep = pipeline.data_preparation(df_clean)
+        df_prod = pipeline.get_prediction_to_json(xgb_final, test_raw, df_prep)
 
         return df_prod
 
