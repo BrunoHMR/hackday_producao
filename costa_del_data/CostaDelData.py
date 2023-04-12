@@ -14,7 +14,6 @@ class CostaDelData(object):
         # Renomeando colunas
         df.columns = [i.replace(' ', '_') for i in df.columns]
         snakecase = lambda x: inflection.underscore(x)
-        cols_new = list(map(snakecase, df.columns))
         cols_new = ['id',
                     'classificacao_do_hotel',
                     'meses_da_reserva_ate_o_check_in',
@@ -55,7 +54,6 @@ class CostaDelData(object):
         df = df.fillna('spain')
 
         # Renomeando linhas das colunas categóricas
-
         # nacionalidade
         rows_nac = list(map(snakecase, df['nacionalidade']))
         df['nacionalidade'] = rows_nac
@@ -88,7 +86,6 @@ class CostaDelData(object):
             lambda x: 'libya' if (x == 'libya') | (x == 'libyan_arab_jamahiriya') else x)
         df['nacionalidade'] = df['nacionalidade'].apply(
             lambda x: 'vietnam' if (x == 'vietnam') | (x == 'viet_nam') else x)
-        # df['nacionalidade'].unique()
 
         # tipo do quarto reservado
         rows_quarto = list(map(snakecase, df['tipo_do_quarto_reservado']))

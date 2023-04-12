@@ -3,7 +3,6 @@ import requests
 import json
 import os
 from flask import Flask, request, Response
-from costa_del_data.CostaDelData import CostaDelData
 
 # constants
 token = '6166531884:AAHfsnsqgkQRV4998A92K-tMnOCPYKPCQVk'
@@ -15,7 +14,7 @@ token = '6166531884:AAHfsnsqgkQRV4998A92K-tMnOCPYKPCQVk'
 # https://api.telegram.org/bot6166531884:AAHfsnsqgkQRV4998A92K-tMnOCPYKPCQVk/getUpdates
 
 # Webhook updates
-# https://api.telegram.org/bot6166531884:AAHfsnsqgkQRV4998A92K-tMnOCPYKPCQVk/setWebhook?url=<localhost.run>
+# https://api.telegram.org/bot6166531884:AAHfsnsqgkQRV4998A92K-tMnOCPYKPCQVk/setWebhook?url=https://costa-del-data-api.onrender.com/costa_del_data/predict
 
 # send message - envia mensagem do bot para mim
 # https://api.telegram.org/bot6166531884:AAHfsnsqgkQRV4998A92K-tMnOCPYKPCQVk/sendMessage?chat_id=5507011943&text=Hi
@@ -86,9 +85,7 @@ def index():
             if data != 'error':
                 df_api_call = predict(data)
 
-                df_api_call['predicao_categorica'] = df_api_call.apply(lambda x: 'cancelada' if x['predicao'] == 1 else 'confirmada', axis = 1)
-
-                msg = 'A reserva de id {} será {}.'.format(df_api_call.loc['id'].values[0], df_api_call.loc['predicao_categorica'].values[0])
+                msg = 'A reserva de id {} será {}.'.format(df_api_call.loc['id'].values[0], df_api_call.loc['predicao'].values[0])
                 send_message(chat_id, msg)
                 return Response('Ok', status=200)
 
