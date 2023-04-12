@@ -34,9 +34,10 @@ def load_data(id_reserva):
 
     if not df_test.empty:
 
-        df_test = df_test[df_test['Meses da reserva até o check-in'] <= 24]
-        df_test = df_test[(df_test['Número de pernoites reservadas'] != 0) & (df_test['Número de pernoites reservadas'] <= 30)]
-        df_test = df_test[(df_test['Número de hospedes'] != 0) & (df_test['Número de hospedes'] <= 6)]
+        # tratativa de outliers
+        df = df[df['meses_da_reserva_ate_o_check_in'] <= 24]
+        df = df[(df['numero_de_pernoites_reservadas'] != 0) & (df['numero_de_pernoites_reservadas'] <= 30)]
+        df_clean = df[(df['numero_de_hospedes'] != 0) & (df['numero_de_hospedes'] <= 6)]
 
         data = json.dumps(df_test.to_dict(orient = 'records'))
 
@@ -89,9 +90,9 @@ def index():
             if data != 'error':
                 df_api_call = predict(data)
 
-                df_api_call['Predição Categórica'] = df_api_call.apply(lambda x: 'Cancelada' if x['Predição'] == 1 else 'Confirmada', axis = 1)
+                df_api_call['predicao_categorica'] = df_api_call.apply(lambda x: 'cancelada' if x['predicao'] == 1 else 'confirmada', axis = 1)
 
-                msg = 'A reserva de id {} será {}.'.format(df_api_call.loc['id'].values[0], df_api_call.loc['Predição Categórica'].values[0])
+                msg = 'A reserva de id {} será {}.'.format(df_api_call.loc['id'].values[0], df_api_call.loc['predicao_categorica'].values[0])
                 send_message(chat_id, msg)
                 return Response('Ok', status=200)
 

@@ -117,21 +117,21 @@ class CostaDelData(object):
         'b2b' if (x == 'B2B') else x)
 
         # tratativa de outliers
-        df = df[df['Meses da reserva até o check-in'] <= 24]
-        df = df[(df['Número de pernoites reservadas'] != 0) & (df['Número de pernoites reservadas'] <= 30)]
-        df_clean = df[(df['Número de hospedes'] != 0) & (df['Número de hospedes'] <= 6)]
+        df = df[df['meses_da_reserva_ate_o_check_in'] <= 24]
+        df = df[(df['numero_de_pernoites_reservadas'] != 0) & (df['numero_de_pernoites_reservadas'] <= 30)]
+        df_clean = df[(df['numero_de_hospedes'] != 0) & (df['numero_de_hospedes'] <= 6)]
 
         return df_clean
 
     def data_preparation(self, df_clean):
         # encodings e seleção de features
-        x_cat_cols = ['Nacionalidade', 'Tipo do quarto reservado', 'Regime de alimentação', 'Reserva com Observações',
-                      'Forma de Reserva']
+        x_cat_cols = ['regime_de_alimentacao', 'nacionalidade', 'forma_de_reserva', 'tipo_do_quarto_reservado', 'reserva_com_observacoes']
         encoder = CountEncoder(cols=x_cat_cols, return_df=True)
         df_prep = encoder.fit_transform(df_clean)
 
+        # Dropando as colunas menos relevantes selecionadas (<1% de importância):
         df_prep = df_prep.drop(
-            ['Reserva feita por agência de turismo', 'Já se hospedou anterioremente', 'Reserva feita por empresa'],
+            ['reserva_feita_por_agencia_de_turismo', 'ja_se_hospedou_anteriormente', 'reserva_feita_por_empresa'],
             axis=1)
 
         return df_prep
