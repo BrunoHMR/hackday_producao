@@ -12,23 +12,20 @@ class CostaDelData(object):
 
     def data_cleaning(self, df):
         # Renomeando colunas
-        df.columns = [i.replace(' ', '_') for i in df.columns]
-        snakecase = lambda x: inflection.underscore(x)
-        cols_new = ['id',
-                    'classificacao_do_hotel',
-                    'meses_da_reserva_ate_o_check_in',
-                    'numero_de_pernoites_reservadas',
-                    'numero_de_hospedes',
-                    'regime_de_alimentacao',
-                    'nacionalidade',
-                    'forma_de_reserva',
-                    'ja_se_hospedou_anteriormente',
-                    'tipo_do_quarto_reservado',
-                    'reserva_feita_por_agencia_de_turismo',
-                    'reserva_feita_por_empresa',
-                    'reserva_com_estacionamento',
-                    'reserva_com_observacoes']
-        df.columns = cols_new
+        df = df.rename(columns={'id': 'id',
+                    'Classificação do hotel': 'classificacao_do_hotel',
+                    'Meses da reserva até o check-in': 'meses_da_reserva_ate_o_check_in',
+                    'Número de pernoites reservadas': 'numero_de_pernoites_reservadas',
+                    'Número de hospedes': 'numero_de_hospedes',
+                    'Regime de alimentação': 'regime_de_alimentacao',
+                    'Nacionalidade': 'nacionalidade',
+                    'Forma de Reserva': 'forma_de_reserva',
+                    'Já se hospedou anterioremente': 'ja_se_hospedou_anteriormente',
+                    'Tipo do quarto reservado': 'tipo_do_quarto_reservado',
+                    'Reserva feita por agência de turismo': 'reserva_feita_por_agencia_de_turismo',
+                    'Reserva feita por empresa': 'reserva_feita_por_empresa',
+                    'Reserva com Estacionamento': 'reserva_com_estacionamento',
+                    'Reserva com Observações': 'reserva_com_observacoes'})
 
         # limpando coluna classificação do hotel
         df['classificacao_do_hotel'] = df.apply(lambda line: line['classificacao_do_hotel'].replace(' estrelas', ' '),
@@ -55,6 +52,7 @@ class CostaDelData(object):
 
         # Renomeando linhas das colunas categóricas
         # nacionalidade
+        snakecase = lambda x: inflection.underscore(x)
         rows_nac = list(map(snakecase, df['nacionalidade']))
         df['nacionalidade'] = rows_nac
         df['nacionalidade'] = [i.replace(' ', '_') for i in df['nacionalidade']]
@@ -112,7 +110,8 @@ class CostaDelData(object):
         # tratativa de outliers
         df = df[df['meses_da_reserva_ate_o_check_in'] <= 24]
         df = df[(df['numero_de_pernoites_reservadas'] != 0) & (df['numero_de_pernoites_reservadas'] <= 30)]
-        df_clean = df[(df['numero_de_hospedes'] != 0) & (df['numero_de_hospedes'] <= 6)]
+        df = df[(df['numero_de_hospedes'] != 0) & (df['numero_de_hospedes'] <= 6)]
+        df_clean = df
 
         return df_clean
 
