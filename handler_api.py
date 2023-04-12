@@ -6,7 +6,7 @@ from flask import Flask, request, Response
 from costa_del_data.CostaDelData import CostaDelData
 
 # lê o modelo
-xgb_final = pickle.load(open('model/xgb_production.pkl', 'rb'))
+xgb_final = pickle.load(open('model/xgb_production_vf.pkl', 'rb'))
 # inicializa a API
 app = Flask(__name__)
 
