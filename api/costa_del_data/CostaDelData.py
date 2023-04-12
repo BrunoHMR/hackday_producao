@@ -49,7 +49,7 @@ class CostaDelData(object):
         df['reserva_feita_por_empresa'] = df['reserva_feita_por_empresa'].apply(lambda x: 0 if x == 'Não' else 1)
 
         # preenchendo os NAs da nacionalidade com Espanha, por ser o país da rede hoteleira
-        df = df.fillna('Spain')
+        df.fillna('Spain')
 
         # nacionalidade
         snakecase = lambda x: inflection.underscore(x)
@@ -85,32 +85,6 @@ class CostaDelData(object):
         df['nacionalidade'] = df['nacionalidade'].apply(
             lambda x: 'vietnam' if (x == 'vietnam') | (x == 'viet_nam') else x)
 
-        # tipo do quarto reservado
-        rows_quarto = list(map(snakecase, df['tipo_do_quarto_reservado']))
-        df['tipo_do_quarto_reservado'] = rows_quarto
-        df['tipo_do_quarto_reservado'] = [j.replace(' ', '_') for j in df['tipo_do_quarto_reservado']]
-
-        # regime de alimentação
-        df['regime_de_alimentacao'] = df['regime_de_alimentacao'].apply(
-            lambda x: 'cafe_almoco_janta' if (x == 'Café da manha, almoco e jantar') else
-            'cafe_janta' if (x == 'Café da manha e jantar') else
-            'cafe' if (x == 'Café da manha') else
-            'sem_refeicao' if (x == 'Sem refeicao') else x)
-
-        # reserva com observações
-        df['reserva_com_observacoes'] = df['reserva_com_observacoes'].apply(lambda x: 'nenhuma' if (x == 'Nenhuma') else
-        '1_a_3' if (x == '1 a 3') else
-        'mais_de_3' if (x == 'Mais de 3') else x)
-
-        # forma de reserva
-        df['forma_de_reserva'] = df['forma_de_reserva'].apply(lambda x: 'agencia' if (x == 'Agência') else
-        'balcao' if (x == 'Balcão') else
-        'b2b' if (x == 'B2B') else x)
-
-        # tratativa de outliers
-        df = df[df['meses_da_reserva_ate_o_check_in'] <= 24]
-        df = df[(df['numero_de_pernoites_reservadas'] != 0) & (df['numero_de_pernoites_reservadas'] <= 30)]
-        df = df[(df['numero_de_hospedes'] != 0) & (df['numero_de_hospedes'] <= 6)]
         df_clean = df
 
         return df_clean
