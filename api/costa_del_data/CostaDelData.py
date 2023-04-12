@@ -49,7 +49,7 @@ class CostaDelData(object):
         df['reserva_feita_por_empresa'] = df['reserva_feita_por_empresa'].apply(lambda x: 0 if x == 'Não' else 1)
 
         # preenchendo os NAs da nacionalidade com Espanha, por ser o país da rede hoteleira
-        df.fillna('Spain')
+        df['nacionalidade'] = df['nacionalidade'].fillna('Spain')
 
         # nacionalidade
         snakecase = lambda x: inflection.underscore(x)
