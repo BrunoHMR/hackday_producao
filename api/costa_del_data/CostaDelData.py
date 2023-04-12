@@ -93,12 +93,14 @@ class CostaDelData(object):
         # encodings e seleção de features
         x_cat_cols = ['regime_de_alimentacao', 'nacionalidade', 'forma_de_reserva', 'tipo_do_quarto_reservado', 'reserva_com_observacoes']
         encoder = CountEncoder(cols=x_cat_cols, return_df=True)
-        df_prep = encoder.fit_transform(df_clean)
+        encoder.fit_transform(df_clean)
 
         # Dropando as colunas menos relevantes selecionadas (<1% de importância):
-        df_prep = df_prep.drop(
+        df_clean.drop(
             ['reserva_feita_por_agencia_de_turismo', 'ja_se_hospedou_anteriormente', 'reserva_feita_por_empresa'],
             axis=1)
+
+        df_prep = df_clean
 
         return df_prep
 
