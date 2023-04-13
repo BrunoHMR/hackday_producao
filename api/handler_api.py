@@ -21,7 +21,20 @@ def costa_del_data_predict():
         #
         # else:  # funciona para quando chegarem vários dados (mais de uma linha de um dicionário)
 
-        test_raw = pd.DataFrame(test_json, columns=test_json[0].keys())  # keys: pega todas as linhas do dicionário
+        test_raw = pd.DataFrame(test_json, columns=test_json['id',
+                    'classificacao_do_hotel',
+                    'meses_da_reserva_ate_o_check_in',
+                    'numero_de_pernoites_reservadas',
+                    'numero_de_hospedes',
+                    'regime_de_alimentacao',
+                    'nacionalidade',
+                    'forma_de_reserva',
+                    'ja_se_hospedou_anteriormente',
+                    'tipo_do_quarto_reservado',
+                    'reserva_feita_por_agencia_de_turismo',
+                    'reserva_feita_por_empresa',
+                    'reserva_com_estacionamento',
+                    'reserva_com_observacoes'])  # keys: pega todas as linhas do dicionário
 
         pipeline = CostaDelData()
         df_clean = pipeline.data_cleaning(test_raw)
