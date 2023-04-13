@@ -20,7 +20,8 @@ def costa_del_data_predict():
         #     test_raw = pd.DataFrame(test_json, index=[0])  # converte o dado que chegou em um dataframe iniciando pelo índice 0
         #
         # else:  # funciona para quando chegarem vários dados (mais de uma linha de um dicionário)
-        test_raw = pd.DataFrame(test_json, columns=test_json[0].keys())  # keys: pega todas as linhas do dicionário
+
+        test_raw = pd.DataFrame(test_json, columns=test_json.keys())  # keys: pega todas as linhas do dicionário
 
         pipeline = CostaDelData()
         df_clean = pipeline.data_cleaning(test_raw)
@@ -36,4 +37,4 @@ def costa_del_data_predict():
 
 if __name__ == '__main__':
     port = os.environ.get('PORT', 5000)
-    app.run(host = '0.0.0.0', port = port)
+    app.run(host = '0.0.0.0', port = port, debug = True)
