@@ -16,12 +16,11 @@ def costa_del_data_predict():
 
     if test_json:  # se o dado chegou
 
-        # if isinstance(test_json, dict):  # funciona para uma única linha do dicionário
-        #     test_raw = pd.DataFrame(test_json, index=[0])  # converte o dado que chegou em um dataframe iniciando pelo índice 0
-        #
-        # else:  # funciona para quando chegarem vários dados (mais de uma linha de um dicionário)
+        if isinstance(test_json, dict):  # funciona para uma única linha do dicionário
+            test_raw = pd.DataFrame(test_json, index=[0])  # converte o dado que chegou em um dataframe iniciando pelo índice 0
 
-        test_raw = pd.DataFrame(test_json, columns=test_json[0])  # keys: pega todas as linhas do dicionário
+        else:  # funciona para quando chegarem vários dados (mais de uma linha de um dicionário)
+            test_raw = pd.DataFrame(test_json, columns=test_json[0].keys())  # keys: pega todas as linhas do dicionário
 
         pipeline = CostaDelData()
         df_clean = pipeline.data_cleaning(test_raw)
