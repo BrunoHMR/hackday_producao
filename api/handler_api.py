@@ -12,17 +12,18 @@ xgb_final = pickle.load(open('model/xgb_production_vf.pkl', 'rb'))
 # inicializa a API
 app = Flask(__name__)
 
-@app.route('/costa_del_data/predict', methods=['GET','POST'])
+@app.route('/costa_del_data/predict', methods=['POST'])
 def costa_del_data_predict():
+
     test_json = request.get_json()  # requisição do arquivo de teste formatado em json
 
     if test_json:  # se o dado chegou
 
-        if isinstance(test_json.json(), dict):  # funciona para uma única linha do dicionário
-            test_raw = pd.DataFrame(test_json.json(), index=[0])  # converte o dado que chegou em um dataframe iniciando pelo índice 0
+        if isinstance(test_json, dict):  # funciona para uma única linha do dicionário
+            test_raw = pd.DataFrame(test_json, index=[0])  # converte o dado que chegou em um dataframe iniciando pelo índice 0
 
         else:  # funciona para quando chegarem vários dados (mais de uma linha de um dicionário)
-            test_raw = pd.DataFrame(test_json.json(), columns=test_json.json()[0].keys())  # keys: pega todas as linhas do dicionário
+            test_raw = pd.DataFrame(test_json, columns=test_json[0].keys())  # keys: pega todas as linhas do dicionário
 
         pipeline = CostaDelData()
         df_clean = pipeline.data_cleaning(test_raw)

@@ -89,7 +89,7 @@ def index():
             if data != 'error':
                 df_api_call = predict(data)
 
-                msg = 'A reserva de id {} será {}.'.format(df_api_call.loc['id'].values[0], df_api_call.loc['predicao'].values[0])
+                msg = 'A reserva de id {} será {}.'.format(df_api_call.loc['id_user'].values[0], df_api_call.loc['predicao'].values[0])
                 send_message(chat_id, msg)
                 return Response('Ok', status=200)
 
