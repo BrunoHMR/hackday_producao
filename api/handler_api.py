@@ -14,7 +14,7 @@ app = Flask(__name__)
 
 @app.route('/costa_del_data/predict', methods=['GET','POST'])
 def costa_del_data_predict():
-    test_json = requests.get('/costa_del_data/predict')  # requisição do arquivo de teste formatado em json
+    test_json = request.get_json()  # requisição do arquivo de teste formatado em json
 
     if test_json:  # se o dado chegou
 
