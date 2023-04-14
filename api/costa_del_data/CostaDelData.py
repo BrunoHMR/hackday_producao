@@ -12,7 +12,7 @@ class CostaDelData(object):
 
     def data_cleaning(self, df):
         # Renomeando colunas
-        cols_new = ['id_user',
+        cols_new = ['id',
                     'classificacao_do_hotel',
                     'meses_da_reserva_ate_o_check_in',
                     'numero_de_pernoites_reservadas',

@@ -19,6 +19,8 @@ def costa_del_data_predict():
 
     if test_json:  # se o dado chegou
 
+        test_json = json.loads(test_json)
+
         if isinstance(test_json, dict):  # funciona para uma única linha do dicionário
             test_raw = pd.DataFrame(test_json, index=[0])  # converte o dado que chegou em um dataframe iniciando pelo índice 0
 
