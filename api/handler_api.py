@@ -60,6 +60,8 @@ def data_cleaning(df):
     df['nacionalidade'] = [i.replace(',', '_') for i in df['nacionalidade']]
     df['nacionalidade'] = [i.replace("'", '_') for i in df['nacionalidade']]
     df['nacionalidade'] = [i.replace("ô", 'o') for i in df['nacionalidade']]
+
+    # juntando nacionalidades iguais com nomes diferentes
     df['nacionalidade'] = df['nacionalidade'].apply(
         lambda x: 'russia' if (x == 'russia') | (x == 'russian_federation') else x)
     df['nacionalidade'] = df['nacionalidade'].apply(
@@ -128,15 +130,20 @@ def costa_del_data_predict():
 
     if test_json:  # se o dado chegou
 
+        # if isinstance(test_json, dict):
+        #     test_raw = pd.DataFrame(test_json, columns = test_json[0].keys())
+        #
+        # elif isinstance(test_json, str):
+        #     test_json = json.loads(test_json)
+        #     test_raw = pd.DataFrame(test_json)
+        #
+        # else:
+        #     test_raw = pd.DataFrame(test_json)
+
         if isinstance(test_json, dict):
-            test_raw = pd.DataFrame(test_json, columns = test_json[0].keys())
-
-        elif isinstance(test_json, str):
-            test_json = json.loads(test_json)
-            test_raw = pd.DataFrame(test_json)
-
+            test_raw = pd.DataFrame(test_json, index=[0])
         else:
-            test_raw = pd.DataFrame(test_json)
+            test_raw = pd.DataFrame(test_json, columns=test_json[0].keys())
 
         df_clean = data_cleaning(test_raw)
         df_prep = data_preparation(df_clean)
