@@ -27,7 +27,7 @@ def costa_del_data_predict():
             test_raw = pd.DataFrame(test_json)
 
         else:
-            test_raw = pd.DataFrame(test_json)
+            test_raw = pd.DataFrame(test_json.json(), columns = test_json.json()[0].keys())
 
         pipeline = CostaDelData()
         df_clean = pipeline.data_cleaning(test_raw)
