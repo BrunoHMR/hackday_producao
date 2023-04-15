@@ -130,20 +130,15 @@ def costa_del_data_predict():
 
     if test_json:  # se o dado chegou
 
-        # if isinstance(test_json, dict):
-        #     test_raw = pd.DataFrame(test_json, columns = test_json[0].keys())
-        #
-        # elif isinstance(test_json, str):
-        #     test_json = json.loads(test_json)
-        #     test_raw = pd.DataFrame(test_json)
-        #
-        # else:
-        #     test_raw = pd.DataFrame(test_json)
-
         if isinstance(test_json, dict):
             test_raw = pd.DataFrame(test_json, index=[0])
+
+        elif isinstance(test_json, str):
+            test_json = json.loads(test_json)
+            test_raw = pd.DataFrame(test_json)
+
         else:
-            test_raw = pd.DataFrame(test_json, columns=test_json[0].keys())
+            test_raw = pd.DataFrame(test_json)
 
         df_clean = data_cleaning(test_raw)
         df_prep = data_preparation(df_clean)
