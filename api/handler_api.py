@@ -20,14 +20,14 @@ def costa_del_data_predict():
     if test_json:  # se o dado chegou
 
         if isinstance(test_json, dict):
-            test_raw = pd.DataFrame(test_json, index=[0])
+            test_raw = pd.DataFrame(test_json, columns = test_json[0].keys())
 
-        if isinstance(test_json, str):
+        elif isinstance(test_json, str):
             test_json = json.loads(test_json)
             test_raw = pd.DataFrame(test_json)
 
         else:
-            test_raw = pd.DataFrame(test_json.json(), columns = test_json.json()[0].keys())
+            test_raw = pd.DataFrame(test_json)
 
         pipeline = CostaDelData()
         df_clean = pipeline.data_cleaning(test_raw)
