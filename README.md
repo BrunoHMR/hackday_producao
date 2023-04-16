@@ -224,3 +224,9 @@ Em comparação, com o baseline de 67% setado no início do projeto o retorno se
 Ou seja, a empresa conseguiria recuperar 125 clientes, totalizando um valor médio diário de US$ 125.000,00, mensal de USS 3.750.000,00 e anual de US$ 45.000.000,00.
 
 Fazendo a diferença entre o potencial do algoritmo do projeto em relação ao algoritmo baseline, o valor médio anual obtido é US$ 19.440.000,00 maior!
+
+## Como testar um Bot no Telegram
+
+Para criar um Bot no Telegram e testar o modelo você deve realizar as seguintes etapas:
+- Na barra de pesquisa do seu aplicativo Telegram, busque por: HotelBot
+- Na conversa com o Bot, digite /id (troque 'id' por um número, por exemplo: /877).
