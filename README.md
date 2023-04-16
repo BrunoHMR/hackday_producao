@@ -59,8 +59,9 @@ Formato da entrega:
 
 Para mais detalhes do projeto, ainda serão entregues:
 1. Arquivos Python 'hotel-bot.py' e 'hotel-api.py' contendo as APIs remotas.
-2. Arquivo Jupyter 'codigo_limpo_final', contendo todos os códigos detalhados da execução do projeto e o design do ETL.
+2. Arquivo Jupyter 'hotel_final', contendo todos os códigos detalhados da execução do projeto e o design do ETL.
 3. Arquivo Jupyter 'teste_api_remota', contendo teste em funcionamento da API escrita no arquivo hotel-api.py.
+4. Relatório de análise exploratória dos dados 'SWEETVIZ_REPORT.html'.
 
 ## Carregamento, limpeza e descrição dos dados
 
@@ -87,7 +88,7 @@ Premissas:
 - Foram tratadas como outliers as linhas da coluna 'Meses da reserva até o check-in' acima de 24 meses, as linhas da coluna 'Número de pernoites reservadas' acima de 30 pernoites e as linhas da coluna 'Número de hospedes' acima de 6 hóspedes, pois foi verificado que a quantidade de reservas totais para estas condições decaia drásticamente, acrescentando quantidades irrelevantes à análise e indicando possíveis preenchimentos equivocados.
 - Foram eliminadas as linhas da coluna 'Número de pernoites reservadas' igual a 0 e as linhas da coluna 'Número de hospedes' igual a 0, pois subentende-se que deve ser reservada pelo menos uma pernoite e deve haver pelo menos 1 hóspede.
 
-Como sugestão para um próximo ciclo, uma opção para o preenchimento de NaNs sem utilizar apenas a Espanha para aumentar a performance do modelo é preencher as linhas NaNs da nacionalidade utilizando um algoritmo de classificação, como o KNN ou a própria Random Forest.
+Como sugestão para próximos ciclos (quando houverem mais linhas NaNs para treinamento no conjunto), uma opção para o preenchimento destes NaNs sem utilizar apenas a Espanha, a fim de aumentar a performance do modelo, é preencher as linhas NaNs da nacionalidade utilizando um algoritmo de classificação, como o KNN ou a Random Forest. Neste ciclo foi testada esta possibilidade, porém o ganho na performance do modelo foi de apenas 0,05%. Deste modo, foi preferível manter os NaNs como Espanha.
 
 ## Formulação das hipóteses de negócio
 
@@ -182,7 +183,7 @@ Para a modelagem foram testados 3 modelos de árvore de decisão, os quais são 
 
 Devido ao fato do XGBoost apresentar uma melhora um pouco mais significativa após a realização da tunagem dos parâmetros e os resultados terem sido muito semelhantes, foi realizada escolhido seguir apenas com o XGBoost para a entrega de uma solução em menor tempo.
 
-Para um próximo ciclo de projeto, sugere-se realizar a separação entre treino e teste tratando o id como parâmetro referencial devido a sua potencial indicação de sazonalidade. Ou seja, os 20% ids maiores podem ser separados para teste, enquanto os demais ficam como treino. Desta forma, os resultados do algoritmo seriam mais fiéis, pois o problema seria tratado como uma time-series.
+Para um próximo ciclo de projeto, sugere-se realizar a separação entre treino e teste tratando o id como parâmetro referencial devido a sua potencial indicação de sazonalidade. Ou seja, os ids maiores devem ser separados para teste, enquanto os demais ficam como treino. Desta forma, os resultados do algoritmo seriam mais fiéis, pois o problema seria tratado como uma time-series.
 
 ## Tunagem dos parâmetros
 
