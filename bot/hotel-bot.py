@@ -89,7 +89,11 @@ def index():
             if data != 'error':
                 df_api_call = predict(data)
 
-                msg = 'A reserva de id {} será {}.'.format(df_api_call.loc['id'].values[0], df_api_call.loc['predicao'].values[0])
+                if df_api_call.loc[0]['predicao'] == 0:
+                    msg = 'A reserva será confirmada.'
+                else:
+                    msg = 'A reserva será cancelada.'
+
                 send_message(chat_id, msg)
                 return Response('Ok', status=200)
 

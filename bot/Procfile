@@ -1,1 +1,1 @@
-web: python bot/bot-telegram.py
+web: python hotel-bot.py
