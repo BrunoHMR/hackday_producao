@@ -189,7 +189,7 @@ Para a modelagem foram testados 3 modelos de árvore de decisão, os quais são 
 - XGBoost: 96,89%.
 - LGBM: 96,36%.
 
-Devido ao fato do XGBoost apresentar uma melhora um pouco mais significativa após a realização da tunagem dos parâmetros e os resultados terem sido muito semelhantes, foi realizada escolhido seguir apenas com o XGBoost para a entrega de uma solução em menor tempo.
+Devido ao fato do XGBoost apresentar uma melhora um pouco mais significativa após a realização da tunagem dos parâmetros e os resultados terem sido muito semelhantes, foi escolhido seguir apenas com o XGBoost para a entrega de uma solução em menor tempo.
 
 Para um próximo ciclo de projeto, sugere-se realizar a separação entre treino e teste tratando o id como parâmetro referencial devido a sua potencial indicação de sazonalidade. Ou seja, os ids maiores devem ser separados para teste, enquanto os demais ficam como treino. Desta forma, os resultados do algoritmo seriam mais fiéis, pois o problema seria tratado como uma time-series.
 
