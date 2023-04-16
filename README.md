@@ -227,6 +227,6 @@ Fazendo a diferença entre o potencial do algoritmo do projeto em relação ao a
 
 ## Como testar um Bot no Telegram
 
-Para criar um Bot no Telegram e testar o modelo você deve realizar as seguintes etapas:
+Para testar o Bot você deve realizar as seguintes etapas:
 - Na barra de pesquisa do seu aplicativo Telegram, busque por: HotelBot
 - Na conversa com o Bot, digite /id (troque 'id' por um número, por exemplo: /877).
