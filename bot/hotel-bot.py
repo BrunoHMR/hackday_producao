@@ -13,14 +13,14 @@ token = '6166531884:AAHfsnsqgkQRV4998A92K-tMnOCPYKPCQVk'
 # get updates - pega a última mensagem que eu enviei para o bot
 # https://api.telegram.org/bot6166531884:AAHfsnsqgkQRV4998A92K-tMnOCPYKPCQVk/getUpdates
 
+# send message - envia mensagem do bot para mim
+# https://api.telegram.org/bot6166531884:AAHfsnsqgkQRV4998A92K-tMnOCPYKPCQVk/sendMessage?chat_id=5507011943&text=Hi
+
 # Webhook
-# https://api.telegram.org/bot6166531884:AAHfsnsqgkQRV4998A92K-tMnOCPYKPCQVk/setWebhook?url=https://costa-del-data-api.onrender.com/costa_del_data/predict
+# https://api.telegram.org/bot6166531884:AAHfsnsqgkQRV4998A92K-tMnOCPYKPCQVk/setWebhook?url=https://costa-del-data-bot.onrender.com
 
 # Delete Webhook
 # https://api.telegram.org/bot6166531884:AAHfsnsqgkQRV4998A92K-tMnOCPYKPCQVk/deleteWebhook
-
-# send message - envia mensagem do bot para mim
-# https://api.telegram.org/bot6166531884:AAHfsnsqgkQRV4998A92K-tMnOCPYKPCQVk/sendMessage?chat_id=5507011943&text=Hi
 
 
 def send_message(chat_id, text):
