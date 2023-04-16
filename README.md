@@ -1,5 +1,7 @@
 # Hotel Chain Cancellation Rating
 
+![HotelChain](https://user-images.githubusercontent.com/108444459/232348913-935b9576-98a3-4621-9cd3-3696b086cbf2.PNG)
+
 ## Problema de negócio
 
 A Costa del Data é uma tradicional rede hoteleira espanhola. A empresa está preocupada com as suas projeções para os próximos anos, visando a recuperação financeira com o fim das restrições impostas pela pandemia de Covid-19. Com a reabertura das fronteiras, a diminuição nas restrições de viagem e o aumento das vacinações, era esperado que o setor hoteleiro da Espanha retomasse os ganhos outrora esperados. Na contramão desta expectativa, a Costa del Data tem visto um aumento em sua taxa de cancelamentos de reservas! A suspeita da diretoria é de que houve uma mudança no comportamento de cancelamentos por parte do consumidor após a pandemia, que ainda não foi compreendida pela rede. Isso travou ações estratégicas críticas como a expansão da rede hoteleira, a reforma das unidades já com obras programadas e a realização de ações de marketing direcionadas.
@@ -90,6 +92,8 @@ Premissas:
 
 Como sugestão para próximos ciclos (quando houverem mais linhas NaNs para treinamento no conjunto), uma opção para o preenchimento destes NaNs sem utilizar apenas a Espanha, a fim de aumentar a performance do modelo, é preencher as linhas NaNs da nacionalidade utilizando um algoritmo de classificação, como o KNN ou a Random Forest. Neste ciclo foi testada esta possibilidade, porém o ganho na performance do modelo foi de apenas 0,05%. Deste modo, foi preferível manter os NaNs como Espanha.
 
+![SweetVizNacionalidade](https://user-images.githubusercontent.com/108444459/232348839-6f19ca75-e2ae-49e8-af88-cacb5eaa01f7.PNG)
+
 ## Formulação das hipóteses de negócio
 
 Apesar de numéricas, as colunas 'Já se hospedou anterioremente', 'Reserva com Estacionamento', 'Classificação do hotel', 'Reserva feita por empresa' e 'Reserva feita por agência de turismo' indicam classificações. Neste caso, serão interpretadas como categóricas.
@@ -155,6 +159,8 @@ Consideração sobre a coluna id:
 - Do id 50 mil ao id 80 mil, em média, a quantidade de cancelamentos é novamente muito maior que a quantidade de reservas confirmadas.
 - Do id 80 mil em diante, em média, a quantidade de cancelamentos é novamente muito menor que a quantidade de reservas confirmadas.
 
+![SweetVizId](https://user-images.githubusercontent.com/108444459/232348664-1b4af3e4-719e-4625-9b27-477d4243d6fe.PNG)
+
 Sugestões à empresa:
 - Como a proporção de cancelamentos por balcão é menor que as proporções por agência e B2B, oferecer pacotes com desconto, realizar parcerias com agências de turismo e com empresas e alocar recursos de marketing nestes grupos de clientes pode reduzir a taxa de cancelamentos.
 - Inserir multas progressivas ou reembolsos parciais para cancelamentos de reservas realizadas a mais de 30 dias.
@@ -171,6 +177,8 @@ Isto poderia ser um problema caso as classificações da variável resposta foss
 Para a seleção dos atributos foi utilizado um algoritmo de Random Forest e um método da biblioteca scikit-learn chamado feature_importances_, que quando aplicado é capaz de treinar um modelo e definir a relevância de cada uma das features para a modelagem através do decrescimento médio da impureza (MDI).
 
 Ficou evidente a importância do 'id', o qual apresentou um MDI maior que 60%. Ou seja, só ele explicava cerca de 60% do fenômeno. Além disso, foram dropadas as colunas com menos de 1% de relevância para o modelo: 'reserva_feita_por_agencia_de_turismo', 'ja_se_hospedou_anteriormente' e 'reserva_feita_por_empresa'.
+
+![FeatureImportances](https://user-images.githubusercontent.com/108444459/232348529-c1ae0ab0-65eb-4ecc-81f8-6593fb6a7fcd.PNG)
 
 ## Modelagem
 
@@ -200,6 +208,8 @@ Após a tunagem dos parâmetros foi realizado o retreino do modelo. Desta vez, s
 - Recall médio final:  95,92%.
 
 Como a queda no F1-Score Macro médio foi de menos de 1%, os dados separados foram concatenados e retreinados para serem enviados à produção.
+
+![Performance](https://user-images.githubusercontent.com/108444459/232349071-61450fe1-fe60-4e7d-8645-14363d11b243.PNG)
 
 ## Resultados financeiros
 
@@ -231,3 +241,5 @@ Fazendo a diferença entre o potencial do algoritmo do projeto em relação ao a
 Para testar o Bot você deve realizar as seguintes etapas:
 - Na barra de pesquisa do seu aplicativo Telegram, busque por: HotelBot
 - Na conversa com o Bot, digite /id (troque 'id' por um número, por exemplo: /877).
+
+![HotelBot](https://user-images.githubusercontent.com/108444459/232347859-f2f70bbc-9f3b-40db-8ddf-3a02400d455d.PNG)
