@@ -123,27 +123,7 @@ Após a realização de uma análise estatística dos dados, onde foram realizad
 
 Foi possível obter os seguintes resultados em relação às hipóteses de negócio formuladas:
 
-Hipótese Conclusão Relevância Insight
-
-i -------- V --------- B ---------- I
-
-ii -------- V --------- B ---------- I
-
-iii	------- F --------- B ---------- P
-
-iv ------- V --------- B ---------- P
-
-v -------- V --------- B ---------- P
-
-vi	------- V --------- M ---------- P
-
-vii ------- V*	-------- M ---------- P
-
-viii ------ V --------- M ---------- P
-
-ix ------- F --------- B ---------- P
-
-x -------- V --------- B ---------- P
+![TabHip](https://user-images.githubusercontent.com/108444459/232368170-e422818e-3dd9-4044-b773-9f647714d4f9.PNG)
 
 Legendas:
 - Conclusão: V para verdadeira, F para falsa, * para exceto Espanha.
@@ -176,7 +156,7 @@ Isto poderia ser um problema caso as classificações da variável resposta foss
 
 Para a seleção dos atributos foi utilizado um algoritmo de Random Forest e um método da biblioteca scikit-learn chamado feature_importances_, que quando aplicado é capaz de treinar um modelo e definir a relevância de cada uma das features para a modelagem através do decrescimento médio da impureza (MDI).
 
-Ficou evidente a importância do 'id', o qual apresentou um MDI maior que 60%. Ou seja, só ele explicava cerca de 60% do fenômeno. Além disso, foram dropadas as colunas com menos de 1% de relevância para o modelo: 'reserva_feita_por_agencia_de_turismo', 'ja_se_hospedou_anteriormente' e 'reserva_feita_por_empresa'.
+Conforme a tabela abaixo, ficou evidente a importância do 'id', o qual apresentou um MDI maior que 60%. Ou seja, só ele explicava cerca de 60% do fenômeno. Além disso, foram dropadas as colunas com menos de 1% de relevância para o modelo: 'reserva_feita_por_agencia_de_turismo', 'ja_se_hospedou_anteriormente' e 'reserva_feita_por_empresa'.
 
 ![FeatureImportances](https://user-images.githubusercontent.com/108444459/232348529-c1ae0ab0-65eb-4ecc-81f8-6593fb6a7fcd.PNG)
 
@@ -208,8 +188,6 @@ Após a tunagem dos parâmetros foi realizado o retreino do modelo. Desta vez, s
 - Recall médio final:  95,92%.
 
 Como a queda no F1-Score Macro médio foi de menos de 1%, os dados separados foram concatenados e retreinados para serem enviados à produção.
-
-![Performance](https://user-images.githubusercontent.com/108444459/232349071-61450fe1-fe60-4e7d-8645-14363d11b243.PNG)
 
 ## Resultados financeiros
 
