@@ -10,11 +10,13 @@ Com base no histórico de reservas dos hóspedes, o objetivo é desenvolver um m
 
 Métrica de Avaliação do problema: F-Score (Macro).
 
+Baseline (performance mínima esperada): 67% de F-Score (Macro).
+
 ## Passos para a resolução do problema
 
-Para resolver o problema será utilizado o método CRISP DS. O CRISP DS é um método adaptado para a Ciência de Dados, onde são realizadas diversas etapas sequenciais as quais não devem ser interrompidas. Ao finalizar a última etapa, o ciclo reinicia e novas alterações são adicionadas a resolução do problema. Desta forma, é possível entregar uma solução completa com eficiência e rapidez, a qual pode ser aperfeiçoada diversas vezes em ciclos posteriores.
+Para resolver o problema foi utilizado o método CRISP-DS. O CRISP-DS é um método adaptado do CRISP-DM, onde são realizadas diversas etapas sequenciais, as quais não devem ser interrompidas. Ao finalizar a última etapa, o ciclo reinicia e novas alterações são adicionadas a resolução do problema. Desta forma, é possível entregar uma solução completa com eficiência e rapidez, a qual pode ser aperfeiçoada diversas vezes em ciclos posteriores.
 
-Neste projeto foi realizado um ciclo completo do CRISP DS, contemplando as seguintes etapas:
+Neste projeto foi realizado um ciclo completo do CRISP-DS, contemplando as seguintes etapas:
 1. Levantamento do problema de negócio:
 - Contexto do problema;
 - Passos para a resolução do problema;
@@ -26,12 +28,12 @@ Neste projeto foi realizado um ciclo completo do CRISP DS, contemplando as segui
 - Aplicação de premissas;
 - Descrição dos dados;
 - Tratativa de outliers.
-4. Análise exploratória de dados:
+4. Análise exploratória dos dados:
 - Formulação de hipóteses de negócio;
 - Proporção de cancelamento de variáveis;
 - Análise de variáveis categóricas;
 - Análise de variáveis numéricas;
-- Conclusão e geração de insights.
+- Validação das hipóteses e geração de insights.
 5. Preparação dos dados:
 - Encodings;
 - Seleção de features por importância.
@@ -60,8 +62,8 @@ Formato da entrega:
 * Considera-se o 'id' como um identificador único do usuário.
 
 Para mais detalhes do projeto, ainda serão entregues:
-1. Arquivos Python 'hotel-bot.py' e 'hotel-api.py' contendo as APIs remotas.
-2. Arquivo Jupyter 'hotel_final', contendo todos os códigos detalhados da execução do projeto e o design do ETL.
+1. Arquivos Python 'hotel-bot.py' e 'hotel-api.py' contendo as APIs.
+2. Arquivo Jupyter 'hotel_final', contendo todos os códigos detalhados da execução do projeto.
 3. Arquivo Jupyter 'teste_api_remota', contendo teste em funcionamento da API escrita no arquivo hotel-api.py.
 4. Relatório de análise exploratória dos dados 'SWEETVIZ_REPORT.html'.
 
@@ -87,7 +89,7 @@ Atributos:
 Premissas:
 - Para as linhas não preenchidas da coluna 'Número de hospedes' foi atribuida a quantidade mínima de hóspedes, que é de 1 hóspede.
 - Para as linhas não preenchidas da coluna 'Nacionalidade' foi atribuído o país sede da rede hoteleira e que também se repete mais vezes, que é a Espanha.
-- Foram tratadas como outliers as linhas da coluna 'Meses da reserva até o check-in' acima de 24 meses, as linhas da coluna 'Número de pernoites reservadas' acima de 30 pernoites e as linhas da coluna 'Número de hospedes' acima de 6 hóspedes, pois foi verificado que a quantidade de reservas totais para estas condições decaia drásticamente, acrescentando quantidades irrelevantes à análise e indicando possíveis preenchimentos equivocados.
+- Foram tratadas como outliers as linhas da coluna 'Meses da reserva até o check-in' acima de 24 meses, as linhas da coluna 'Número de pernoites reservadas' acima de 30 pernoites e as linhas da coluna 'Número de hospedes' acima de 6 hóspedes, pois foi verificado que a quantidade de reservas totais para estas condições decaia drasticamente, acrescentando quantidades irrelevantes à análise e indicando possíveis preenchimentos equivocados.
 - Foram eliminadas as linhas da coluna 'Número de pernoites reservadas' igual a 0 e as linhas da coluna 'Número de hospedes' igual a 0, pois subentende-se que deve ser reservada pelo menos uma pernoite e deve haver pelo menos 1 hóspede.
 
 Como sugestão para próximos ciclos (quando houverem mais linhas NaNs para treinamento no conjunto), uma opção para o preenchimento destes NaNs sem utilizar apenas a Espanha, a fim de aumentar a performance do modelo, é preencher as linhas NaNs da nacionalidade utilizando um algoritmo de classificação, como o KNN ou a Random Forest. Neste ciclo foi testada esta possibilidade, porém o ganho na performance do modelo foi de apenas 0,05%. Deste modo, foi preferível manter os NaNs como Espanha.
@@ -148,15 +150,15 @@ Sugestões à empresa:
 
 ## Encodings
 
-Como o problema é de classificação, foram pensados algoritmos de árvores de decisão para o treinamento do modelo. Por este motivo, foi realizado apenas o encoding das variáveis categóricas, visto que as árvores de decisão não realizam contas, apenas recortes no espaço de dados. Então, foi definido um encoding do tipo Count Encoder, que realiza a transformação dos atributos categóricos em numéricos de acordo com a quantidade de vezes que o atributo aparece no conjunto de dados.
+Como o problema é de classificação, foram pensados algoritmos de árvores de decisão para o treinamento do modelo. Por este motivo, foi realizado apenas o encoding das variáveis categóricas, visto que as árvores de decisão não realizam operações matemáticas, mas apenas recortes no espaço de dados. Então, foi definido um encoding do tipo Count Encoder, que realiza a transformação dos atributos categóricos em numéricos de acordo com a quantidade de vezes que o atributo aparece no conjunto de dados.
 
-Isto poderia ser um problema caso as classificações da variável resposta fossem muito desbalanceadas. Porém, como a proporção dos dados era de 63% para não confirmados e 37% para confirmados o desbalanceamento não era tão grande, apresentando resultados semelhantes após a modelagem em comparação ao One Hot Encoding e ao Target Encoding, que poderiam ser opções mais viáveis para dados não balanceados. Para um próximo ciclo, conforme mais dados forem armazenados, caso o o desbalanceamento aumente deve ser considerado outro tipo de encoding.
+Isto poderia ser um problema caso as classificações da variável resposta fossem muito desbalanceadas. Porém, como a proporção dos dados era de 63% para não confirmados e 37% para confirmados o desbalanceamento não era tão grande, apresentando resultados semelhantes após a modelagem em comparação ao One Hot Encoding e ao Target Encoding, que poderiam ser opções mais viáveis para dados não balanceados. Para próximos ciclos, conforme mais dados forem armazenados, caso o desbalanceamento aumente deve ser considerado outros tipos de encodings.
 
 ## Seleção de features
 
 Para a seleção dos atributos foi utilizado um algoritmo de Random Forest e um método da biblioteca scikit-learn chamado feature_importances_, que quando aplicado é capaz de treinar um modelo e definir a relevância de cada uma das features para a modelagem através do decrescimento médio da impureza (MDI).
 
-Conforme a tabela abaixo, ficou evidente a importância do 'id', o qual apresentou um MDI maior que 60%. Ou seja, só ele explicava cerca de 60% do fenômeno. Além disso, foram dropadas as colunas com menos de 1% de relevância para o modelo: 'reserva_feita_por_agencia_de_turismo', 'ja_se_hospedou_anteriormente' e 'reserva_feita_por_empresa'.
+Conforme a tabela abaixo, ficou evidente a importância do 'id', o qual apresentou um MDI maior que 60%. Ou seja, somente o 'id' explica cerca de 60% do fenômeno. Além disso, foram dropadas as colunas com menos de 1% de relevância para o modelo: 'reserva_feita_por_agencia_de_turismo', 'ja_se_hospedou_anteriormente' e 'reserva_feita_por_empresa'.
 
 ![FeatureImportances](https://user-images.githubusercontent.com/108444459/232348529-c1ae0ab0-65eb-4ecc-81f8-6593fb6a7fcd.PNG)
 
@@ -169,16 +171,16 @@ Para a modelagem foram testados 3 modelos de árvore de decisão, os quais são 
 - XGBoost: 96,89%.
 - LGBM: 96,36%.
 
-Devido ao fato do XGBoost apresentar uma melhora um pouco mais significativa após a realização da tunagem dos parâmetros e os resultados terem sido muito semelhantes, foi escolhido seguir apenas com o XGBoost para a entrega de uma solução em menor tempo.
+Devido ao fato do XGBoost apresentar uma melhora um pouco mais significativa após a realização da tunagem dos parâmetros e os resultados terem sido muito semelhantes, foi escolhido seguir apenas com o XGBoost, para a entrega de uma solução em menor tempo.
 
-Para um próximo ciclo de projeto, sugere-se realizar a separação entre treino e teste tratando o id como parâmetro referencial devido a sua potencial indicação de sazonalidade. Ou seja, os ids maiores devem ser separados para teste, enquanto os demais ficam como treino. Desta forma, os resultados do algoritmo seriam mais fiéis, pois o problema seria tratado como uma time-series.
+Para um próximo ciclo de projeto, sugere-se realizar a separação entre treino e teste tratando o id como parâmetro referencial devido a sua potencial indicação de sazonalidade. Ou seja, os ids maiores devem ser separados para teste, enquanto os demais ficam como treino. Desta forma, os resultados do algoritmo seriam mais fiéis, pois o problema seria tratado como uma série temporal (time-series).
 
 ## Tunagem dos parâmetros
 
 Os métodos de tunagem foram separados em: Grid Search, Random Search e Bayes Search.
 - Grid Search: foi descartada devido ao tempo de resposta ser muito alto. Como a performance do modelo já é considerada bem elevada mesmo sem a tunagem, do ponto de vista de negócio, para uma entrega de solução rápida, a Grid Search acaba sendo inviável.
 - Random Search: apresentou uma relativa demora na execução, mesmo para uma quantidade de apenas 10 iterações. Além disso, apresentou um resultado inferior à Bayes Search.
-- Bayes Search: foi a escolhida por ter alcançado a melhor performance e por ter demorado menos tempo para ser executada (4h30min para 100 interações e 5 folds, com uma lista de 6 parâmetros, cada um com 5 valores distintos a serem testados).
+- Bayes Search: foi a escolhida por ter alcançado a melhor performance e por ter demorado menos tempo para ser executada (4h30min para 100 iterações e 5 folds, com uma lista de 6 parâmetros, cada um com 5 valores distintos a serem testados).
 
 ## Generalização do modelo
 
@@ -187,7 +189,7 @@ Após a tunagem dos parâmetros foi realizado o retreino do modelo. Desta vez, s
 - Precision média final:  96,76%.
 - Recall médio final:  95,92%.
 
-Como a queda no F1-Score Macro médio foi de menos de 1%, os dados separados foram concatenados e retreinados para serem enviados à produção.
+Como a queda no F1-Score Macro médio foi de menos de 1%, os dados separados foram concatenados, retreinados e enviados à produção.
 
 ## Resultados financeiros
 
@@ -204,7 +206,7 @@ Deste modo, o aumento que a empresa terá com reservas em sua receita pode chega
 
 Exemplo prático:
 
-A diária tem um ticket médio de USS 1.000,00 e consegue uma quantidade média de 1.000 reservas diárias. Em um dia, a empresa está perdendo, em média, 373 reservas, totalizando o valor médio diário de US$ 373.000,00, mensal de US$ 11.190.000,00 e anual de US$ 134.280.000,00.
+A diária tem um ticket médio de USS 1.000,00 e a empresa consegue uma quantidade média de 1.000 reservas diárias. Em um dia, a empresa está perdendo, em média, 373 reservas, totalizando o valor médio diário de US$ 373.000,00, mensal de US$ 11.190.000,00 e anual de US$ 134.280.000,00.
 
 Considere uma taxa de reversão de cancelamentos hipotética da empresa de 50%. Multiplicando este valor pelo percentual de reservas canceladas que o algoritmo consegue prever, que é de 35,8%, é obtido um valor percentual médio de reservas canceladas de 17,9%. Então, em um dia, a empresa consegue reverter 179 cancelamentos (17,9% de 1000 reservas diárias), totalizando o valor médio diário de US$ 179.000,00, mensal de US$ 5.370.000,00 e anual de USS 64.440.000,00!
 
