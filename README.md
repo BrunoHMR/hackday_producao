@@ -21,22 +21,22 @@ Neste projeto foi realizado um ciclo completo do CRISP-DS, contemplando as segui
 - Contexto do problema;
 - Passos para a resolução do problema;
 - Planejamento da solução.
-2. Carregamento dos dados:
+2. Descrição dos dados:
 - Visão geral dos dados;
 - Descrição dos atributos.
-3. Limpeza dos dados:
+3. Engenharia de atributos:
 - Aplicação de premissas;
-- Descrição dos dados;
-- Tratativa de outliers.
+- Tratativa de outliers;
+- Formulação de hipóteses de negócio.
 4. Análise exploratória dos dados:
-- Formulação de hipóteses de negócio;
 - Proporção de cancelamento de variáveis;
 - Análise de variáveis categóricas;
 - Análise de variáveis numéricas;
-- Validação das hipóteses e geração de insights.
+- Validação das hipóteses de negócio;
+- Geração de insights.
 5. Preparação dos dados:
 - Encodings;
-- Seleção de features por importância.
+- Seleção de atributos por importância.
 6. Implementação dos modelos de Machine Learning:
 - Teste de modelos iniciais;
 - Tunagem de parâmetros do modelo escolhido;
@@ -67,7 +67,7 @@ Para mais detalhes do projeto, ainda serão entregues:
 3. Arquivo Jupyter 'teste_api_remota', contendo teste em funcionamento da API escrita no arquivo hotel-api.py.
 4. Relatório de análise exploratória dos dados 'SWEETVIZ_REPORT.html'.
 
-## Carregamento, limpeza e descrição dos dados
+## Descrição e limpeza dos dados
 
 Atributos:
 - 'id',
@@ -120,8 +120,8 @@ Após a realização de uma análise estatística dos dados, onde foram realizad
 - Cálculo das proporções de cancelamento para cada atributo do conjunto de dados;
 - Análise univariada das variáveis numéricas e da variável resposta;
 - Análise bivariada das variáveis numéricas e das variáveis categóricas;
-- Correlação de Pearson para as variáveis numéricas;
-- Método de Cramer's V para as variáveis categóricas.
+- Matriz de Correlação de Pearson para as variáveis numéricas;
+- Matriz do método de Cramer's V para as variáveis categóricas.
 
 Foi possível obter os seguintes resultados em relação às hipóteses de negócio formuladas:
 
@@ -152,11 +152,11 @@ Sugestões à empresa:
 
 Como o problema é de classificação, foram pensados algoritmos de árvores de decisão para o treinamento do modelo. Por este motivo, foi realizado apenas o encoding das variáveis categóricas, visto que as árvores de decisão não realizam operações matemáticas, mas apenas recortes no espaço de dados. Então, foi definido um encoding do tipo Count Encoder, que realiza a transformação dos atributos categóricos em numéricos de acordo com a quantidade de vezes que o atributo aparece no conjunto de dados.
 
-Isto poderia ser um problema caso as classificações da variável resposta fossem muito desbalanceadas. Porém, como a proporção dos dados era de 63% para não confirmados e 37% para confirmados o desbalanceamento não era tão grande, apresentando resultados semelhantes após a modelagem em comparação ao One Hot Encoding e ao Target Encoding, que poderiam ser opções mais viáveis para dados não balanceados. Para próximos ciclos, conforme mais dados forem armazenados, caso o desbalanceamento aumente deve ser considerado outros tipos de encodings.
+Isto poderia ser um problema caso as classificações da variável resposta fossem muito desbalanceadas. Porém, como a proporção dos dados era de 63% para não confirmados e 37% para confirmados, o desbalanceamento não era tão grande, apresentando resultados semelhantes após a modelagem em comparação ao One Hot Encoding e ao Target Encoding, que poderiam ser opções mais viáveis para dados não balanceados. Para próximos ciclos, conforme mais dados forem armazenados, caso o desbalanceamento aumente deve ser considerado outros tipos de encodings.
 
-## Seleção de features
+## Seleção de atributos
 
-Para a seleção dos atributos foi utilizado um algoritmo de Random Forest e um método da biblioteca scikit-learn chamado feature_importances_, que quando aplicado é capaz de treinar um modelo e definir a relevância de cada uma das features para a modelagem através do decrescimento médio da impureza (MDI).
+Para a seleção dos atributos foi utilizado um algoritmo de Random Forest e um método da biblioteca scikit-learn chamado 'feature_importances_', que quando aplicado é capaz de treinar um modelo e definir a relevância de cada uma das features para a modelagem através do decrescimento médio da impureza (MDI).
 
 Conforme a tabela abaixo, ficou evidente a importância do 'id', o qual apresentou um MDI maior que 60%. Ou seja, somente o 'id' explica cerca de 60% do fenômeno. Além disso, foram dropadas as colunas com menos de 1% de relevância para o modelo: 'reserva_feita_por_agencia_de_turismo', 'ja_se_hospedou_anteriormente' e 'reserva_feita_por_empresa'.
 
@@ -173,7 +173,7 @@ Para a modelagem foram testados 3 modelos de árvore de decisão, os quais são 
 
 Devido ao fato do XGBoost apresentar uma melhora um pouco mais significativa após a realização da tunagem dos parâmetros e os resultados terem sido muito semelhantes, foi escolhido seguir apenas com o XGBoost, para a entrega de uma solução em menor tempo.
 
-Para um próximo ciclo de projeto, sugere-se realizar a separação entre treino e teste tratando o id como parâmetro referencial devido a sua potencial indicação de sazonalidade. Ou seja, os ids maiores devem ser separados para teste, enquanto os demais ficam como treino. Desta forma, os resultados do algoritmo seriam mais fiéis, pois o problema seria tratado como uma série temporal (time-series).
+Para um próximo ciclo de projeto, sugere-se realizar a separação entre treino e teste tratando o 'id' como parâmetro referencial devido a sua potencial indicação de sazonalidade. Ou seja, os ids maiores devem ser separados para teste, enquanto os demais ficam como treino. Desta forma, os resultados do algoritmo seriam mais fiéis, pois o problema seria tratado como uma série temporal (time-series).
 
 ## Tunagem dos parâmetros
 
@@ -210,7 +210,7 @@ A diária tem um ticket médio de USS 1.000,00 e a empresa consegue uma quantida
 
 Considere uma taxa de reversão de cancelamentos hipotética da empresa de 50%. Multiplicando este valor pelo percentual de reservas canceladas que o algoritmo consegue prever, que é de 35,8%, é obtido um valor percentual médio de reservas canceladas de 17,9%. Então, em um dia, a empresa consegue reverter 179 cancelamentos (17,9% de 1000 reservas diárias), totalizando o valor médio diário de US$ 179.000,00, mensal de US$ 5.370.000,00 e anual de USS 64.440.000,00!
 
-Em comparação, com o baseline de 67% setado no início do projeto o retorno seria de: 37,3% * 67% * 50% = 12,5%
+Em comparação, com o baseline de 67% setado no início do projeto o retorno seria de: 37,3% * 67% * 50% = 12,5%.
 
 Ou seja, a empresa conseguiria recuperar 125 clientes, totalizando um valor médio diário de US$ 125.000,00, mensal de USS 3.750.000,00 e anual de US$ 45.000.000,00.
 
