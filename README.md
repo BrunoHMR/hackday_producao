@@ -152,7 +152,7 @@ Sugestões à empresa:
 
 Como o problema é de classificação, foram pensados algoritmos de árvores de decisão para o treinamento do modelo. Por este motivo, foi realizado apenas o encoding das variáveis categóricas, visto que as árvores de decisão não realizam operações matemáticas, mas apenas recortes no espaço de dados. Então, foi definido um encoding do tipo Count Encoder, que realiza a transformação dos atributos categóricos em numéricos de acordo com a quantidade de vezes que o atributo aparece no conjunto de dados.
 
-Isto poderia ser um problema caso as classificações da variável resposta fossem muito desbalanceadas. Porém, como a proporção dos dados era de 63% para não confirmados e 37% para confirmados, o desbalanceamento não era tão grande, apresentando resultados semelhantes após a modelagem em comparação ao One Hot Encoding e ao Target Encoding, que poderiam ser opções mais viáveis para dados não balanceados. Para próximos ciclos, conforme mais dados forem armazenados, caso o desbalanceamento aumente deve ser considerado outros tipos de encodings.
+Isto poderia ser um problema caso as classificações da variável resposta fossem muito desbalanceadas. Porém, como a proporção dos dados era de 63% para reservas não canceladas e 37% para reservas canceladas, o desbalanceamento não era tão grande, apresentando resultados semelhantes após a modelagem em comparação ao One Hot Encoding e ao Target Encoding, que poderiam ser opções mais viáveis para dados não balanceados. Para próximos ciclos, conforme mais dados forem armazenados, caso o desbalanceamento aumente deve ser considerado outros tipos de encodings.
 
 ## Seleção de atributos
 
