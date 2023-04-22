@@ -189,7 +189,7 @@ Após a tunagem dos parâmetros foi realizado o retreino do modelo. Desta vez, s
 - Precision média final:  96,76%.
 - Recall médio final:  95,92%.
 
-Como a queda no F1-Score Macro médio foi de menos de 1%, os dados separados foram concatenados, retreinados e enviados à produção.
+Como a queda no F1-Score Macro médio foi de menos de 1%, os dados separados foram concatenados e retreinados, armazenados através da biblioteca 'pickle' e enviados à produção.
 
 ## Resultados financeiros
 
@@ -206,7 +206,7 @@ Deste modo, o aumento que a empresa terá com reservas em sua receita pode chega
 
 Exemplo prático:
 
-A diária tem um ticket médio de USS 1.000,00 e a empresa consegue uma quantidade média de 1.000 reservas diárias. Em um dia, a empresa está perdendo, em média, 373 reservas, totalizando o valor médio diário de US$ 373.000,00, mensal de US$ 11.190.000,00 e anual de US$ 134.280.000,00.
+A diária tem um ticket médio de US$ 1.000,00 e a empresa consegue uma quantidade média de 1.000 reservas diárias. Em um dia, a empresa está perdendo, em média, 373 reservas, totalizando o valor médio diário de US$ 373.000,00, mensal de US$ 11.190.000,00 e anual de US$ 134.280.000,00.
 
 Considere uma taxa de reversão de cancelamentos hipotética da empresa de 50%. Multiplicando este valor pelo percentual de reservas canceladas que o algoritmo consegue prever, que é de 35,8%, é obtido um valor percentual médio de reservas canceladas de 17,9%. Então, em um dia, a empresa consegue reverter 179 cancelamentos (17,9% de 1000 reservas diárias), totalizando o valor médio diário de US$ 179.000,00, mensal de US$ 5.370.000,00 e anual de USS 64.440.000,00!
 
