@@ -47,8 +47,7 @@ Neste projeto foi realizado um ciclo completo do CRISP-DS, contemplando as segui
 8. Modelo em produção:
 - Design do ETL;
 - Armazenamento do modelo treinado na nuvem;
-- Desenvolvimento de API para verificar as reservas canceladas de acordo com o id dos usuários;
-- Desenvolvimento de Bot no Telegram para verificar as reservas canceladas de acordo com o id dos usuários.
+- Desenvolvimento de API para verificar as reservas canceladas de acordo com o id dos usuários.
 
 ## Planejamento da solução
 
@@ -58,7 +57,7 @@ Ferramentas utilizadas: Python 3.9.16 e bibliotecas (contidas no arquivo do proj
 
 Formato da entrega:
 1. Arquivo .csv 'submission.csv' com as previsões para cada 'id' do conjunto de teste.
-2. Bot no telegram com as previsões para cada 'id' do conjunto de teste.
+2. Bot no telegram com as previsões para cada 'id' do conjunto de teste **(DESATIVADO!)**.
 * Considera-se o 'id' como um identificador único do usuário.
 
 Para mais detalhes do projeto, ainda serão entregues:
@@ -216,7 +215,7 @@ Ou seja, a empresa conseguiria recuperar 125 clientes, totalizando um valor méd
 
 Fazendo a diferença entre o potencial do algoritmo do projeto em relação ao algoritmo baseline, o valor médio anual obtido é US$ 19.440.000,00 maior!
 
-## Como testar um Bot no Telegram
+## Como testar um Bot no Telegram (DESATIVADO!)
 
 Para testar o Bot você deve realizar as seguintes etapas:
 - Na barra de pesquisa do seu aplicativo Telegram, busque por: HotelBot
