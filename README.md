@@ -6,7 +6,7 @@
 
 A Costa del Data é uma tradicional rede hoteleira espanhola. A empresa está preocupada com as suas projeções para os próximos anos, visando a recuperação financeira com o fim das restrições impostas pela pandemia de Covid-19. Com a reabertura das fronteiras, a diminuição nas restrições de viagem e o aumento das vacinações, era esperado que o setor hoteleiro da Espanha retomasse os ganhos outrora esperados. Na contramão desta expectativa, a Costa del Data tem visto um aumento em sua taxa de cancelamentos de reservas! A suspeita da diretoria é de que houve uma mudança no comportamento de cancelamentos por parte do consumidor após a pandemia, que ainda não foi compreendida pela rede. Isso travou ações estratégicas críticas como a expansão da rede hoteleira, a reforma das unidades já com obras programadas e a realização de ações de marketing direcionadas.
 
-Com base no histórico de reservas dos hóspedes, o objetivo é desenvolver um modelo de previsão de cancelamentos. O modelo deve prever a variável alvo "Reserva Cancelada", retornando 1 em caso de cancelamento, e 0 em caso de não cancelamento.
+Com base no histórico de reservas dos hóspedes, o objetivo é desenvolver um modelo de previsão de cancelamentos. O modelo deve prever a variável alvo "Reserva Cancelada", retornando 1 em caso de cancelamento e 0 em caso de não cancelamento.
 
 Métrica de Avaliação do problema: F-Score (Macro).
 
@@ -14,7 +14,7 @@ Baseline (performance mínima esperada): 67% de F-Score (Macro).
 
 ## Passos para a resolução do problema
 
-Para resolver o problema foi utilizado o método CRISP-DS. O CRISP-DS é um método adaptado do CRISP-DM, onde são realizadas diversas etapas sequenciais, as quais não devem ser interrompidas. Ao finalizar a última etapa, o ciclo reinicia e novas alterações são adicionadas a resolução do problema. Desta forma, é possível entregar uma solução completa com eficiência e rapidez, a qual pode ser aperfeiçoada diversas vezes em ciclos posteriores.
+Para resolver o problema foi utilizado o método CRISP-DS. O CRISP-DS é um método adaptado do CRISP-DM, onde são realizadas diversas etapas sequenciais, as quais não devem ser interrompidas. Ao finalizar a última etapa, o ciclo reinicia e novas alterações são adicionadas à resolução do problema. Desta forma, é possível entregar uma solução completa com eficiência e rapidez, a qual pode ser aperfeiçoada diversas vezes em ciclos posteriores.
 
 Neste projeto foi realizado um ciclo completo do CRISP-DS, contemplando as seguintes etapas:
 1. Levantamento do problema de negócio:
@@ -57,7 +57,6 @@ Ferramentas utilizadas: Python 3.9.16 e bibliotecas (contidas no arquivo do proj
 
 Formato da entrega:
 1. Arquivo .csv 'submission.csv' com as previsões para cada 'id' do conjunto de teste.
-2. Bot no telegram com as previsões para cada 'id' do conjunto de teste **(DESATIVADO!)**.
 * Considera-se o 'id' como um identificador único do usuário.
 
 Para mais detalhes do projeto, ainda serão entregues:
@@ -86,27 +85,27 @@ Atributos:
 - 'Reserva Cancelada'
 
 Premissas:
-- Para as linhas não preenchidas da coluna 'Número de hospedes' foi atribuida a quantidade mínima de hóspedes, que é de 1 hóspede.
-- Para as linhas não preenchidas da coluna 'Nacionalidade' foi atribuído o país sede da rede hoteleira e que também se repete mais vezes, que é a Espanha.
+- Para as linhas não preenchidas da coluna 'Número de hospedes' foi atribuída a quantidade mínima de hóspedes, que é de 1 hóspede.
+- Para as linhas não preenchidas da coluna 'Nacionalidade' foi atribuído o país-sede da rede hoteleira e que também se repete mais vezes, que é a Espanha.
 - Foram tratadas como outliers as linhas da coluna 'Meses da reserva até o check-in' acima de 24 meses, as linhas da coluna 'Número de pernoites reservadas' acima de 30 pernoites e as linhas da coluna 'Número de hospedes' acima de 6 hóspedes, pois foi verificado que a quantidade de reservas totais para estas condições decaia drasticamente, acrescentando quantidades irrelevantes à análise e indicando possíveis preenchimentos equivocados.
-- Foram eliminadas as linhas da coluna 'Número de pernoites reservadas' igual a 0 e as linhas da coluna 'Número de hospedes' igual a 0, pois subentende-se que deve ser reservada pelo menos uma pernoite e deve haver pelo menos 1 hóspede.
+- Foram eliminadas as linhas da coluna 'Número de pernoites reservadas' iguais a 0 e as linhas da coluna 'Número de hospedes' iguais a 0, pois subentende-se que deve ser reservada pelo menos uma pernoite e deve haver pelo menos 1 hóspede.
 
-Como sugestão para próximos ciclos (quando houverem mais linhas NaNs para treinamento no conjunto), uma opção para o preenchimento destes NaNs sem utilizar apenas a Espanha, a fim de aumentar a performance do modelo, é preencher as linhas NaNs da nacionalidade utilizando um algoritmo de classificação, como o KNN ou a Random Forest. Neste ciclo foi testada esta possibilidade, porém o ganho na performance do modelo foi de apenas 0,05%. Deste modo, foi preferível manter os NaNs como Espanha.
+Como sugestão para próximos ciclos (quando houver mais linhas de NaNs para treinamento no conjunto), uma opção para o preenchimento destes NaNs sem utilizar apenas a Espanha, a fim de aumentar a performance do modelo, é preencher as linhas de NaNs da nacionalidade utilizando um algoritmo de classificação, como o KNN ou a Random Forest. Neste ciclo foi testada esta possibilidade, porém o ganho na performance do modelo foi de apenas 0,05%. Deste modo, foi preferível manter os NaNs como Espanha.
 
 ![SweetVizNacionalidade](https://user-images.githubusercontent.com/108444459/232348839-6f19ca75-e2ae-49e8-af88-cacb5eaa01f7.PNG)
 
 ## Formulação das hipóteses de negócio
 
-Apesar de numéricas, as colunas 'Já se hospedou anterioremente', 'Reserva com Estacionamento', 'Classificação do hotel', 'Reserva feita por empresa' e 'Reserva feita por agência de turismo' indicam classificações. Neste caso, serão interpretadas como categóricas.
+Apesar de numéricas, as colunas 'Já se hospedou anteriormente', 'Reserva com Estacionamento', 'Classificação do hotel', 'Reserva feita por empresa' e 'Reserva feita por agência de turismo' indicam classificações. Neste caso, serão interpretadas como categóricas.
 
 Hipóteses relacionadas as variáveis categóricas:
-- 1. Hotéis com classificação 5 estrelas possuem uma proporção de cancelamentos menor que hotéis com classificação de 4 estrelas.
+- 1. Hotéis com classificação de 5 estrelas possuem uma proporção de cancelamentos menor que hotéis com classificação de 4 estrelas.
 - 2. Clientes que já se hospedaram anteriormente possuem uma proporção de cancelamentos menor que clientes que nunca se hospedaram antes.
-- 3. Reservas feitas por balcão tem uma proporção de cancelamento maior que as realizadas por agência de turismo ou B2B.
+- 3. Reservas feitas por balcão têm uma proporção de cancelamento maior que as realizadas por agência de turismo ou B2B.
 - 4. Reservas feitas com estacionamento possuem uma menor proporção de cancelamento.
 - 5. Reservas feitas com café da manhã, almoço e jantar possuem uma menor proporção de cancelamento que as demais.
 - 6. Reservas feitas sem nenhuma observação possuem uma maior proporção de cancelamento que as demais.
-- 7. Reservas feitas por países do continente europeu possuem uma menor proporção de cancelamento as demais.
+- 7. Reservas feitas por países do continente europeu possuem uma menor proporção de cancelamento que as demais.
 
 Hipóteses relacionadas as variáveis numéricas:
 - 8. Reservas feitas com um tempo igual ou menor a 2 meses do período de check-in possuem uma menor proporção de cancelamento.
@@ -151,11 +150,11 @@ Sugestões à empresa:
 
 Como o problema é de classificação, foram pensados algoritmos de árvores de decisão para o treinamento do modelo. Por este motivo, foi realizado apenas o encoding das variáveis categóricas, visto que as árvores de decisão não realizam operações matemáticas, mas apenas recortes no espaço de dados. Então, foi definido um encoding do tipo Count Encoder, que realiza a transformação dos atributos categóricos em numéricos de acordo com a quantidade de vezes que o atributo aparece no conjunto de dados.
 
-Isto poderia ser um problema caso as classificações da variável resposta fossem muito desbalanceadas. Porém, como a proporção dos dados era de 63% para reservas não canceladas e 37% para reservas canceladas, o desbalanceamento não era tão grande, apresentando resultados semelhantes após a modelagem em comparação ao One Hot Encoding e ao Target Encoding, que poderiam ser opções mais viáveis para dados não balanceados. Para próximos ciclos, conforme mais dados forem armazenados, caso o desbalanceamento aumente deve ser considerado outros tipos de encodings.
+Isto poderia ser um problema caso as classificações da variável resposta fossem muito desbalanceadas. Porém, como a proporção dos dados era de 63% para reservas não canceladas e 37% para reservas canceladas, o desbalanceamento não era tão grande, apresentando resultados semelhantes após a modelagem em comparação ao One Hot Encoding e ao Target Encoding, que poderiam ser opções mais viáveis para dados não balanceados. Para próximos ciclos, conforme mais dados forem armazenados, caso o desbalanceamento aumente, devem ser considerados outros tipos de encodings.
 
 ## Seleção de atributos
 
-Para a seleção dos atributos foi utilizado um algoritmo de Random Forest e um método da biblioteca scikit-learn chamado 'feature_importances_', que quando aplicado é capaz de treinar um modelo e definir a relevância de cada uma das features para a modelagem através do decrescimento médio da impureza (MDI).
+Para a seleção dos atributos foram utilizados um algoritmo de Random Forest e um método da biblioteca scikit-learn chamado 'feature_importances_', que quando aplicado é capaz de treinar um modelo e definir a relevância de cada uma das features para a modelagem através do decrescimento médio da impureza (MDI).
 
 Conforme a tabela abaixo, ficou evidente a importância do 'id', o qual apresentou um MDI maior que 60%. Ou seja, somente o 'id' explica cerca de 60% do fenômeno. Além disso, foram dropadas as colunas com menos de 1% de relevância para o modelo: 'reserva_feita_por_agencia_de_turismo', 'ja_se_hospedou_anteriormente' e 'reserva_feita_por_empresa'.
 
@@ -163,7 +162,7 @@ Conforme a tabela abaixo, ficou evidente a importância do 'id', o qual apresent
 
 ## Modelagem
 
-Primeiramente o arquivo .csv de treino foi separado em treino e teste, onde foram dedicados 20% dos dados para teste.
+Primeiramente, o arquivo .csv de treino foi separado em treino e teste, onde foram dedicados 20% dos dados para teste.
 
 Para a modelagem foram testados 3 modelos de árvore de decisão, os quais são de fácil implementação e apresentam resultados excelentes em problemas de classificação: Random Forest, XGBoost e LGBM. Sem a tunagem dos parâmetros e com a aplicação da técnica de Cross-Validation para 5 divisões do conjunto de dados, foram obtidas as seguintes performances de F1-Score Macro médio:
 - Random Forest: 96,98%.
@@ -172,7 +171,7 @@ Para a modelagem foram testados 3 modelos de árvore de decisão, os quais são 
 
 Devido ao fato do XGBoost apresentar uma melhora um pouco mais significativa após a realização da tunagem dos parâmetros e os resultados terem sido muito semelhantes, foi escolhido seguir apenas com o XGBoost, para a entrega de uma solução em menor tempo.
 
-Para um próximo ciclo de projeto, sugere-se realizar a separação entre treino e teste tratando o 'id' como parâmetro referencial devido a sua potencial indicação de sazonalidade. Ou seja, os ids maiores devem ser separados para teste, enquanto os demais ficam como treino. Desta forma, os resultados do algoritmo seriam mais fiéis, pois o problema seria tratado como uma série temporal (time-series).
+Para um próximo ciclo de projeto, sugere-se realizar a separação entre treino e teste tratando o 'id' como parâmetro referencial devido a sua potencial indicação de sazonalidade. Ou seja, os ids maiores devem ser separados para teste, enquanto os demais ficam como treino. Desta forma, os resultados do algoritmo seriam mais fiéis, pois o problema seria tratado como uma série temporal (time series).
 
 ## Tunagem dos parâmetros
 
@@ -201,24 +200,16 @@ Para traduzir os resultados do modelo em resultados financeiros, é possível re
 Multiplicando o percentual de reservas canceladas pelo recall do algoritmo:
 37,3% * 95,9% = 35,8%.
 
-Deste modo, o aumento que a empresa terá com reservas em sua receita pode chegar até 35,8%. Isso ocorreria caso ela conseguisse reverter 100% dos cancelamentos. Portanto, para prever o percentual de aumento de receita através das reservas a empresa deve multiplicar os 35,8% pela sua taxa de reversão de cancelamentos.
+Deste modo, o aumento que a empresa terá com reservas em sua receita pode chegar até 35,8%. Isso ocorreria caso ela conseguisse reverter 100% dos cancelamentos. Portanto, para prever o percentual de aumento de receita através das reservas, a empresa deve multiplicar os 35,8% pela sua taxa de reversão de cancelamentos.
 
 Exemplo prático:
 
 A diária tem um ticket médio de US$ 1.000,00 e a empresa consegue uma quantidade média de 1.000 reservas diárias. Em um dia, a empresa está perdendo, em média, 373 reservas, totalizando o valor médio diário de US$ 373.000,00, mensal de US$ 11.190.000,00 e anual de US$ 134.280.000,00.
 
-Considere uma taxa de reversão de cancelamentos hipotética da empresa de 50%. Multiplicando este valor pelo percentual de reservas canceladas que o algoritmo consegue prever, que é de 35,8%, é obtido um valor percentual médio de reservas canceladas de 17,9%. Então, em um dia, a empresa consegue reverter 179 cancelamentos (17,9% de 1000 reservas diárias), totalizando o valor médio diário de US$ 179.000,00, mensal de US$ 5.370.000,00 e anual de USS 64.440.000,00!
+Considere uma taxa de reversão de cancelamentos hipotética da empresa de 50%. Multiplicando este valor pelo percentual de reservas canceladas que o algoritmo consegue prever, que é de 35,8%, é obtido um valor percentual médio de reservas canceladas de 17,9%. Então, em um dia, a empresa consegue reverter 179 cancelamentos (17,9% de 1000 reservas diárias), totalizando o valor médio diário de US$ 179.000,00, mensal de US$ 5.370.000,00 e anual de US$ 64.440.000,00!
 
 Em comparação, com o baseline de 67% setado no início do projeto o retorno seria de: 37,3% * 67% * 50% = 12,5%.
 
-Ou seja, a empresa conseguiria recuperar 125 clientes, totalizando um valor médio diário de US$ 125.000,00, mensal de USS 3.750.000,00 e anual de US$ 45.000.000,00.
+Ou seja, a empresa conseguiria recuperar 125 clientes, totalizando um valor médio diário de US$ 125.000,00, mensal de US$ 3.750.000,00 e anual de US$ 45.000.000,00.
 
 Fazendo a diferença entre o potencial do algoritmo do projeto em relação ao algoritmo baseline, o valor médio anual obtido é US$ 19.440.000,00 maior!
-
-## Como testar um Bot no Telegram (DESATIVADO!)
-
-Para testar o Bot você deve realizar as seguintes etapas:
-- Na barra de pesquisa do seu aplicativo Telegram, busque por: HotelBot
-- Na conversa com o Bot, digite /id (troque 'id' por um número, por exemplo: /877).
-
-![HotelBot](https://user-images.githubusercontent.com/108444459/232347859-f2f70bbc-9f3b-40db-8ddf-3a02400d455d.PNG)
